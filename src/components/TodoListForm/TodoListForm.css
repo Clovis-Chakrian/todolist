@@ -1,0 +1,16 @@
+#todo-list-form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 15px;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-input {
+  resize: none;
+}

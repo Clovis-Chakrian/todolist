@@ -1,23 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { useReducer, useState } from 'react';
+import { TodoListForm } from './components/TodoListForm/TodoListForm';
+import { TodoListItem } from './components/TodoListItem/TodoListItem';
+import { todoListReducer } from './reducers/todoListReducer';
+
 function App() {
+  const [novaTask, setNovaTask] = useState({ titulo: "", descricao: "" });
+  const [tasks, dispatch] = useReducer(todoListReducer, []);
+
+  function handleAddTask() {
+    dispatch({ type: "add", task: novaTask });
+    setNovaTask({ titulo: "", descricao: "" });
+  };
+
+  function handleAlternarConclusaoTask(taskId, statusConclusaoAtual) {
+    if (statusConclusaoAtual) {
+      dispatch({ type: "desconcluir", taskId });
+    } else {
+      dispatch({ type: "concluir", taskId });
+    }
+  };
+
+  function handleRemoveTask(taskId) {
+    dispatch({ type: "remover", taskId });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Bem vindo a sua lista de tarefas</h1>
+
+      <h2>Adicione uma tarefa</h2>
+      <TodoListForm novaTask={novaTask} setNovaTask={setNovaTask} salvarTask={handleAddTask} />
+
+      <h2>Suas Tarefas</h2>
+      {
+        tasks.map(task => {
+          return (
+            <TodoListItem
+              key={task.id}
+              titulo={task.titulo}
+              descricao={task.descricao}
+              dataConclusao={new Date()}
+              concluido={task.concluido}
+              handleRemover={() => handleRemoveTask(task.id)}
+              handleAlternarConclusao={() => handleAlternarConclusaoTask(task.id, task.concluido)}
+            />
+          );
+        })
+      }
     </div>
   );
 }
