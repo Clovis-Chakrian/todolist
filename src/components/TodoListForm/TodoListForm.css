@@ -13,4 +13,28 @@
 
 .form-input {
   resize: none;
+  border: none;
+  border-radius: 4px;
+  padding-left: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.txt-input {
+  height: 22px;
+}
+
+.form-input:focus {
+  border-bottom: 1px solid #199bff;
+}
+
+.form-input:focus-visible {
+  outline: none;
+}
+
+.submit-button {
+  border: none;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 26px;
+  font-weight: bold;
 }

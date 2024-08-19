@@ -18,24 +18,25 @@ export function TodoListForm({ novaTask, setNovaTask, salvarTask }) {
   return (
     <form id='todo-list-form'>
       <div className='form-element'>
-        <label htmlFor="titulo">Título</label>
-        <input className='form-input' type="text" name="titulo" value={novaTask.titulo} onChange={handleChange} />
+        <label htmlFor="title">Título</label>
+        <input placeholder='Atividade da disciplina...' className='form-input txt-input' type="text" name="title" value={novaTask?.title} onChange={handleChange} />
       </div>
 
       <div className='form-element'>
-        <label htmlFor="descricao">Descrição</label>
+        <label htmlFor="description">Descrição</label>
         <textarea
-          className='form-input'
+          placeholder='Deve ser construída uma aplicação que...'
+          className='form-input txt-area'
           type="text"
           rows="5"
-          name="descricao"
-          value={novaTask.descricao}
+          name="description"
+          value={novaTask?.description}
           onChange={handleChange}
         />
 
       </div>
 
-      <button type='submit' onClick={handleSubmit}>Adicionar tarefa</button>
+      <button className='submit-button' type='submit' onClick={handleSubmit}>Adicionar tarefa</button>
     </form>
   );
 }

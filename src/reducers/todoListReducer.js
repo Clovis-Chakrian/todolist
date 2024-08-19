@@ -1,11 +1,19 @@
-export function todoListReducer(tasks, action) {
+import { taskService } from "../services/taskService";
+
+export async function todoListReducer(tasks, action) {
   switch (action.type) {
+    case 'obter': {
+      const { data } = await taskService.obterTasks();
+      
+      return data;
+    }
+
     case 'add': {
       let id = gerarId();
       while (tasks.filter(task => task.id === id).length > 0) {
         id = gerarId();
       };
-      
+
       return [
         ...tasks,
         {
